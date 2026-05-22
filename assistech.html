@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assistech Medições</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  (function() {
+    emailjs.init("cSeXs6-9V4oEQB2uv");
+  })();
+</script>
+
+<style>
+    *{ margin:0; padding:0; box-sizing:border-box; font-family:Arial, Helvetica, sans-serif; }
+    body{ background:#f4f6f9; color:#222; }
+
+    header{ background:#0b1f3a; color:white; padding:30px; text-align:center; }
+    header h1{ font-size:40px; }
+    header p{ margin-top:10px; font-size:18px; }
+
+    .container{ width:95%; max-width:1300px; margin:auto; padding:30px 0; }
+    h2{ margin-bottom:20px; color:#0b1f3a; }
+
+    .produtos{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:25px; }
+
+    .card{ background:white; border-radius:12px; overflow:hidden; box-shadow:0 3px 10px rgba(0,0,0,0.15); transition:0.3s; }
+    .card:hover{ transform:translateY(-5px); }
+
+    .card img{ width:100%; height:280px; object-fit:contain; background:#fff; padding:15px; }
+
+    .card-content { 
+        padding:20px; 
+        display: flex;          
+        flex-direction: column; 
+        height: calc(100% - 280px); 
+    }
+    .card h3{ margin-bottom:10px; color:#0b1f3a; }
+    .descricao{ font-size:14px; line-height:1.5; margin-bottom:15px; color:#555; }
+    .preco{ font-size:17px; font-weight:bold; margin-bottom:15px; color:#007b2f; line-height:1.7; }
+
+    .acoes{ display:flex; flex-direction:column; gap:10px; margin-top: auto; }
+    input[type=number]{ padding:10px; border-radius:6px; border:1px solid #ccc; width:100%; font-size:15px; }
+
+    button{ padding:12px; border:none; border-radius:6px; background:#0b1f3a; color:white; cursor:pointer; font-weight:bold; transition:0.3s; font-size:14px; }
+    button:hover{ background:#163968; }
+    button:active{ transform:scale(0.98); }
+    .btn-adicionar.adicionado{ background:#007b2f; }
+
+    .orcamento{ margin-top:50px; background:white; padding:30px; border-radius:12px; box-shadow:0 3px 10px rgba(0,0,0,0.15); }
+
+    .tipo-periodo{ display:flex; gap:20px; flex-wrap:wrap; align-items:flex-end; margin-bottom:20px; }
+    .tipo-periodo label{ font-weight:bold; display:block; margin-bottom:6px; color:#0b1f3a; }
+    select{ padding:10px; border-radius:6px; border:1px solid #ccc; font-size:15px; }
+
+    #campo-dias{ display:none; }
+    #campo-dias.visivel{ display:block; }
+
+    table{ width:100%; border-collapse:collapse; margin-top:20px; }
+    table th, table td{ border:1px solid #ccc; padding:10px; text-align:center; }
+    table th{ background:#0b1f3a; color:white; }
+    tr:nth-child(even) td{ background:#f9f9f9; }
+
+    .total{ margin-top:20px; font-size:24px; font-weight:bold; text-align:right; color:#007b2f; }
+
+    .botoes-finais{ display:flex; gap:15px; margin-top:20px; flex-wrap:wrap; }
+    .btn-perigo{ background:#b00020; }
+    .btn-perigo:hover{ background:#d32f2f; }
+
+    .aviso-vazio{ text-align:center; color:#aaa; padding:30px; font-style:italic; }
+
+    footer{ margin-top:50px; background:#0b1f3a; color:white; text-align:center; padding:20px; }
+
+    @media(max-width:600px){
+        header h1{ font-size:26px; }
+        .botoes-finais{ flex-direction:column; }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>ASSISTECH MEDIÇÕES</h1>
+    <p>Especializada em consertos, manutenção, compra e aluguel de instrumentos Minipa</p>
+</header>
+
+<div class="container">
+
+    <h2>Instrumentos Disponíveis</h2>
+
+    <div class="produtos">
+
+        <div class="card">
+            <img src="ET-2507B.png" alt="Multímetro Minipa ET-2507B">
+            <div class="card-content">
+                <h3>Multímetro Minipa ET-2507B</h3>
+                <p class="descricao">Multímetro digital profissional True RMS, ideal para medições elétricas industriais, tensão AC/DC, corrente, resistência, frequência e testes eletrônicos.</p>
+                <div class="preco">Compra: R$ 450,00<br>Aluguel: R$ 60,00/dia</div>
+                <div class="acoes">
+                    <input type="number" id="qtd-et2507b" min="1" value="1">
+                    <button class="btn-adicionar" onclick="adicionarProduto('ET-2507B','Multímetro Minipa ET-2507B',450,60,'qtd-et2507b',this)">
+                        Adicionar ao orçamento
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="ET-1649.png" alt="Multímetro Minipa ET-1649">
+            <div class="card-content">
+                <h3>Multímetro Minipa ET-1649</h3>
+                <p class="descricao">Multímetro de bancada de alta precisão para laboratório e manutenção eletrônica, com medições estáveis e excelente resolução.</p>
+                <div class="preco">Compra: R$ 780,00<br>Aluguel: R$ 95,00/dia</div>
+                <div class="acoes">
+                    <input type="number" id="qtd-et1649" min="1" value="1">
+                    <button class="btn-adicionar" onclick="adicionarProduto('ET-1649','Multímetro Minipa ET-1649',780,95,'qtd-et1649',this)">
+                        Adicionar ao orçamento
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="ET-3200.png" alt="Alicate Amperímetro Minipa ET-3200">
+            <div class="card-content">
+                <h3>Alicate Amperímetro Minipa ET-3200</h3>
+                <p class="descricao">Alicate amperímetro True RMS para medições de corrente AC/DC, tensão, continuidade e aplicações industriais de manutenção elétrica.</p>
+                <div class="preco">Compra: R$ 520,00<br>Aluguel: R$ 70,00/dia</div>
+                <div class="acoes">
+                    <input type="number" id="qtd-et3200" min="1" value="1">
+                    <button class="btn-adicionar" onclick="adicionarProduto('ET-3200','Alicate Amperímetro Minipa ET-3200',520,70,'qtd-et3200',this)">
+                        Adicionar ao orçamento
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="ET-3111.png" alt="Alicate Amperímetro Minipa ET-3111">
+            <div class="card-content">
+                <h3>Alicate Amperímetro Minipa ET-3111</h3>
+                <p class="descricao">Alicate amperímetro compacto e robusto para medições elétricas em instalações prediais e industriais, com ótima precisão e segurança.</p>
+                <div class="preco">Compra: R$ 390,00<br>Aluguel: R$ 50,00/dia</div>
+                <div class="acoes">
+                    <input type="number" id="qtd-et3111" min="1" value="1">
+                    <button class="btn-adicionar" onclick="adicionarProduto('ET-3111','Alicate Amperímetro Minipa ET-3111',390,50,'qtd-et3111',this)">
+                        Adicionar ao orçamento
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="orcamento">
+
+        <h2>Orçamento</h2>
+
+        <div class="tipo-periodo">
+            <div>
+                <label>Tipo de orçamento:</label>
+                <select id="tipoOrcamento" onchange="alterarTipo()">
+                    <option value="compra">Compra</option>
+                    <option value="aluguel">Aluguel</option>
+                </select>
+            </div>
+            <div id="campo-dias">
+                <label>Número de dias:</label>
+                <input type="number" id="numeroDias" min="1" value="1" style="width:100px; padding:10px; border-radius:6px; border:1px solid #ccc;" oninput="atualizarTabela()">
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Qtd.</th>
+                    <th id="th-valor">Valor Unitário</th>
+                    <th>Total</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaOrcamento">
+                <tr><td colspan="5" class="aviso-vazio">Nenhum item adicionado ainda.</td></tr>
+            </tbody>
+        </table>
+
+        <div class="total" id="valorTotal">Total: R$ 0,00</div>
+
+        <div class="botoes-finais">
+            <button onclick="gerarPDF()">⬇ Baixar PDF</button>
+            <button onclick="enviarEmail()">✉ Enviar por Email</button>
+            <button class="btn-perigo" onclick="limparOrcamento()">✕ Limpar Orçamento</button>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Assistech Medições — Assistência Técnica Especializada Minipa
+</footer>
+
+<script>
+let itens = [];
+
+function adicionarProduto(id, nome, valorCompra, valorAluguel, inputId, btn){
+    let qtd = parseInt(document.getElementById(inputId).value);
+    if(!qtd || qtd < 1){ alert('Informe uma quantidade válida.'); return; }
+
+    let existente = itens.find(item => item.id === id);
+    if(existente){
+        existente.quantidade += qtd;
+    } else {
+        itens.push({ id, nome, compra:valorCompra, aluguel:valorAluguel, quantidade:qtd });
+    }
+
+    btn.textContent = '✔ Adicionado!';
+    btn.classList.add('adicionado');
+    setTimeout(() => {
+        btn.textContent = 'Adicionar ao orçamento';
+        btn.classList.remove('adicionado');
+    }, 1500);
+
+    atualizarTabela();
+}
+
+function alterarTipo(){
+    let tipo = document.getElementById('tipoOrcamento').value;
+    let campoDias = document.getElementById('campo-dias');
+    let thValor = document.getElementById('th-valor');
+    if(tipo === 'aluguel'){
+        campoDias.classList.add('visivel');
+        thValor.textContent = 'Valor/dia';
+    } else {
+        campoDias.classList.remove('visivel');
+        thValor.textContent = 'Valor Unitário';
+    }
+    atualizarTabela();
+}
+
+function atualizarTabela(){
+    let tabela = document.getElementById('tabelaOrcamento');
+    tabela.innerHTML = '';
+
+    let tipo = document.getElementById('tipoOrcamento').value;
+    let dias = parseInt(document.getElementById('numeroDias').value) || 1;
+    let total = 0;
+
+    if(itens.length === 0){
+        tabela.innerHTML = '<tr><td colspan="5" class="aviso-vazio">Nenhum item adicionado ainda.</td></tr>';
+        document.getElementById('valorTotal').textContent = 'Total: R$ 0,00';
+        return;
+    }
+
+    itens.forEach((item, index) => {
+        let valor = tipo === 'compra' ? item.compra : item.aluguel;
+        let subtotal = tipo === 'compra'
+            ? valor * item.quantidade
+            : valor * item.quantidade * dias;
+        total += subtotal;
+
+        tabela.innerHTML += `
+            <tr>
+                <td style="text-align:left">${item.nome}</td>
+                <td>${item.quantidade}</td>
+                <td>R$ ${valor.toFixed(2).replace('.',',')}</td>
+                <td><strong>R$ ${subtotal.toFixed(2).replace('.',',')}</strong></td>
+                <td>
+                    <button onclick="removerItem(${index})" style="background:#b00020; padding:6px 12px; font-size:13px;">
+                        Remover
+                    </button>
+                </td>
+            </tr>
+        `;
+    });
+
+    let sufixo = tipo === 'aluguel' ? ` (${dias} dia${dias > 1 ? 's' : ''})` : '';
+    document.getElementById('valorTotal').textContent =
+        `Total${sufixo}: R$ ${total.toFixed(2).replace('.',',')}`;
+}
+
+function removerItem(index){
+    itens.splice(index, 1);
+    atualizarTabela();
+}
+
+function limparOrcamento(){
+    if(itens.length === 0) return;
+    if(confirm('Deseja realmente limpar o orçamento?')){
+        itens = [];
+        atualizarTabela();
+    }
+}
+
+function gerarPDF(){
+    if(itens.length === 0){ alert('Adicione itens ao orçamento antes de gerar o PDF.'); return; }
+
+    const { jsPDF } = window.jspdf;
+    let doc = new jsPDF();
+    let tipo = document.getElementById('tipoOrcamento').value;
+    let dias = parseInt(document.getElementById('numeroDias').value) || 1;
+
+    doc.setFillColor(11, 31, 58);
+    doc.rect(0, 0, 210, 35, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(22);
+    doc.text('ASSISTECH MEDIÇÕES', 20, 18);
+    doc.setFontSize(12);
+    doc.text('Assistência Técnica Especializada Minipa', 20, 28);
+
+    doc.setTextColor(0, 0, 0);
+    doc.setFontSize(14);
+    let label = tipo === 'compra'
+        ? 'Orçamento de COMPRA'
+        : `Orçamento de ALUGUEL — ${dias} dia${dias > 1 ? 's' : ''}`;
+    doc.text(label, 20, 48);
+
+    doc.setFontSize(11);
+    doc.setFillColor(11, 31, 58);
+    doc.rect(20, 54, 170, 8, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.text('Produto', 22, 60);
+    doc.text('Qtd', 110, 60);
+    doc.text('Unit.', 130, 60);
+    doc.text('Total', 160, 60);
+
+    doc.setTextColor(0, 0, 0);
+    let y = 72;
+    let total = 0;
+
+    itens.forEach((item, i) => {
+        if(i % 2 === 0){ doc.setFillColor(245, 247, 250); doc.rect(20, y - 6, 170, 10, 'F'); }
+        let valor = tipo === 'compra' ? item.compra : item.aluguel;
+        let subtotal = tipo === 'compra' ? valor * item.quantidade : valor * item.quantidade * dias;
+        total += subtotal;
+        doc.setFontSize(10);
+        doc.text(item.nome, 22, y);
+        doc.text(String(item.quantidade), 113, y);
+        doc.text('R$ ' + valor.toFixed(2), 128, y);
+        doc.text('R$ ' + subtotal.toFixed(2), 158, y);
+        y += 12;
+    });
+
+    doc.setDrawColor(11, 31, 58);
+    doc.line(20, y, 190, y);
+    y += 8;
+    doc.setFontSize(13);
+    doc.setTextColor(0, 123, 47);
+    doc.text('TOTAL: R$ ' + total.toFixed(2), 190, y, { align: 'right' });
+
+    doc.setFontSize(9);
+    doc.setTextColor(150, 150, 150);
+    doc.text('Assistech Medições © 2026', 20, 285);
+
+    doc.save(`orcamento_${tipo}_assistech.pdf`);
+}
+
+// FUNÇÃO ATUALIZADA PEDINDO O E-MAIL DO DESTINATÁRIO DINAMICAMENTE
+function enviarEmail(){
+    if(itens.length === 0){ alert('Adicione itens ao orçamento antes de enviar.'); return; }
+
+    // Solicita o e-mail do destinatário
+    let emailDestinatario = prompt("Digite o e-mail para onde deseja enviar o orçamento:");
+    
+    // Validação básica para ver se o usuário preencheu ou cancelou
+    if (!emailDestinatario || emailDestinatario.trim() === "") {
+        alert("Envio cancelado. É necessário informar um e-mail válido.");
+        return;
+    }
+
+    let tipo = document.getElementById('tipoOrcamento').value;
+    let dias = parseInt(document.getElementById('numeroDias').value) || 1;
+    
+    let listaProdutos = "";
+    let total = 0;
+
+    itens.forEach(item => {
+        let valor = tipo === 'compra' ? item.compra : item.aluguel;
+        let subtotal = tipo === 'compra' ? valor * item.quantidade : valor * item.quantidade * dias;
+        total += subtotal;
+        listaProdutos += `${item.nome} — Qtd: ${item.quantidade} — Total: R$ ${subtotal.toFixed(2).replace('.',',')}\n`;
+    });
+
+    let periodoTexto = tipo === 'aluguel' ? `Período: ${dias} dia${dias > 1 ? 's' : ''}\n` : '';
+    let totalGeral = `R$ ${total.toFixed(2).replace('.',',')}`;
+
+    let params = {
+        cliente_email: emailDestinatario.trim(), // Repassa o e-mail digitado para a tag {{cliente_email}}
+        tipo_orcamento: tipo.toUpperCase(),
+        produtos_lista: listaProdutos,
+        periodo: periodoTexto,
+        total_geral: totalGeral
+    };
+
+    const serviceID = "service_50no4yd";
+    const templateID = "template_5a7sppl";
+
+    emailjs.send(serviceID, templateID, params)
+        .then(() => {
+            alert('Orçamento enviado com sucesso para: ' + emailDestinatario);
+        })
+        .catch((err) => {
+            alert('Falha ao enviar o orçamento. Erro: ' + JSON.stringify(err));
+        });
+}
+</script>
+
+</body>
+</html>
