@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vortex Eletrônica</title>
+<title>Assistech Medições</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -82,7 +82,7 @@
 <body>
 
 <header>
-    <h1>VORTEX ELETRÔNICA</h1>
+    <h1>ASSISTECH MEDIÇÕES</h1>
     <p>Especializada em consertos, manutenção, compra e aluguel de instrumentos Minipa</p>
 </header>
 
@@ -200,7 +200,7 @@
 </div>
 
 <footer>
-    © 2026 Vortex Eletrônica — Assistência Técnica Especializada Minipa
+    © 2026 Assistech Medições — Assistência Técnica Especializada Minipa
 </footer>
 
 <script>
@@ -307,7 +307,7 @@ function gerarPDF(){
     doc.rect(0, 0, 210, 35, 'F');
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(22);
-    doc.text('VORTEX ELETRÔNICA', 20, 18);
+    doc.text('ASSISTECH MEDIÇÕES', 20, 18);
     doc.setFontSize(12);
     doc.text('Assistência Técnica Especializada Minipa', 20, 28);
 
@@ -353,9 +353,9 @@ function gerarPDF(){
 
     doc.setFontSize(9);
     doc.setTextColor(150, 150, 150);
-    doc.text('Vortex Eletrônica © 2026', 20, 285);
+    doc.text('Assistech Medições © 2026', 20, 285);
 
-    doc.save(`orcamento_${tipo}_vortex_eletronica.pdf`);
+    doc.save(`orcamento_${tipo}_assistech.pdf`);
 }
 
 // FUNÇÃO ATUALIZADA PEDINDO O E-MAIL DO DESTINATÁRIO DINAMICAMENTE
