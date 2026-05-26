@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Assistech Medições</title>
+<title>Vortex Eletronica</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -82,7 +83,7 @@
 <body>
 
 <header>
-    <h1>ASSISTECH MEDIÇÕES</h1>
+    <h1>VORTEX ELETRÔNICA</h1>
     <p>Especializada em consertos, manutenção, compra e aluguel de instrumentos Minipa</p>
 </header>
 
@@ -200,7 +201,7 @@
 </div>
 
 <footer>
-    © 2026 Assistech Medições — Assistência Técnica Especializada Minipa
+    © 2026 Vortex Eletrônica — Assistência Técnica Especializada Minipa
 </footer>
 
 <script>
@@ -307,7 +308,7 @@ function gerarPDF(){
     doc.rect(0, 0, 210, 35, 'F');
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(22);
-    doc.text('ASSISTECH MEDIÇÕES', 20, 18);
+    doc.text('VORTEX ELETRÔNICA', 20, 18);
     doc.setFontSize(12);
     doc.text('Assistência Técnica Especializada Minipa', 20, 28);
 
@@ -353,19 +354,16 @@ function gerarPDF(){
 
     doc.setFontSize(9);
     doc.setTextColor(150, 150, 150);
-    doc.text('Assistech Medições © 2026', 20, 285);
+    doc.text('Vortex Eletrônica © 2026', 20, 285);
 
-    doc.save(`orcamento_${tipo}_assistech.pdf`);
+    doc.save(`orcamento_${tipo}_vortex_eletronica.pdf`);
 }
 
-// FUNÇÃO ATUALIZADA PEDINDO O E-MAIL DO DESTINATÁRIO DINAMICAMENTE
 function enviarEmail(){
     if(itens.length === 0){ alert('Adicione itens ao orçamento antes de enviar.'); return; }
 
-    // Solicita o e-mail do destinatário
     let emailDestinatario = prompt("Digite o e-mail para onde deseja enviar o orçamento:");
     
-    // Validação básica para ver se o usuário preencheu ou cancelou
     if (!emailDestinatario || emailDestinatario.trim() === "") {
         alert("Envio cancelado. É necessário informar um e-mail válido.");
         return;
@@ -388,7 +386,7 @@ function enviarEmail(){
     let totalGeral = `R$ ${total.toFixed(2).replace('.',',')}`;
 
     let params = {
-        cliente_email: emailDestinatario.trim(), // Repassa o e-mail digitado para a tag {{cliente_email}}
+        cliente_email: emailDestinatario.trim(),
         tipo_orcamento: tipo.toUpperCase(),
         produtos_lista: listaProdutos,
         periodo: periodoTexto,
